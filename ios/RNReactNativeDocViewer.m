@@ -88,6 +88,9 @@ RCT_EXPORT_METHOD(openDoc:(NSArray *)array callback:(RCTResponseSenderBlock)call
                 callback(@[[NSNull null], array]);
             }
             UIViewController* root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+            // change the tint bar header color to match our app
+            [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+            [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];
             [root presentViewController:cntr animated:YES completion:nil];
         });
         
