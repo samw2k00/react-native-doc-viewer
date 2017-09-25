@@ -89,8 +89,14 @@ RCT_EXPORT_METHOD(openDoc:(NSArray *)array callback:(RCTResponseSenderBlock)call
             }
             UIViewController* root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
             // change the tint bar header color to match our app
-            [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-            [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];
+            NSOperatingSystemVersion ios11_0_0 = (NSOperatingSystemVersion){11, 0, 0};
+            if([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios11_0_0]){
+                [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+                [[UINavigationBar appearance] setBarStyle: UIBarStyleBlack];
+            }else {
+                [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+                [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];
+            }
             [root presentViewController:cntr animated:YES completion:nil];
         });
         
